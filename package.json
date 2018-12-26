@@ -1,0 +1,17 @@
+{
+  "name": "taskrouter-cli",
+  "version": "0.0.1",
+  "description": "Twilio Task Router Command Line Interface",
+  "main": "index.js",
+  "bin": {
+    "taskrouter": "./bin/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.1",
+    "lodash": "^4.17.11",
+    "twilio": "^3.25.0"
+  }
+}
