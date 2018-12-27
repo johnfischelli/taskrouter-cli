@@ -8,6 +8,8 @@ const program = require('commander');
 const selectWorkspace = require('../lib/cmd/selectWorkspace');
 const displaySelectedWorkspace = require('../lib/cmd/displaySelectedWorkspace');
 const createWorkspace = require('../lib/cmd/createWorkspace');
+const createQueue = require('../lib/cmd/createQueue');
+const deleteQueue = require('../lib/cmd/deleteQueue');
 const createWorker = require('../lib/cmd/createWorker');
 const deleteWorker = require('../lib/cmd/deleteWorker');
 const exportCmd = require('../lib/cmd/export');
@@ -30,6 +32,18 @@ program.command('createWorkspace [name]').alias('cws')
         .description('Creates a Workspace (assumes default profile)')
         .action(function(name) {
           createWorkspace(name);
+        });
+
+program.command('createQueue [name]').alias('cq')
+        .description('Creates a Queue (assumes default profile, and selected workspace)')
+        .action(function(name) {
+          createQueue(name);
+        });
+
+program.command('deleteQueue [name]').alias('dq')
+        .description('Deletes a Queue by friendly name (assumes default profile, and selected workspace)')
+        .action(function(name) {
+          deleteQueue(name);
         });
 
 program.command('createWorker [name]').alias('cw')
