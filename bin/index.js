@@ -8,6 +8,7 @@ const program = require('commander');
 const selectWorkspace = require('../lib/cmd/selectWorkspace');
 const displaySelectedWorkspace = require('../lib/cmd/displaySelectedWorkspace');
 const createWorkspace = require('../lib/cmd/createWorkspace');
+const listQueue = require('../lib/cmd/listQueue');
 const createQueue = require('../lib/cmd/createQueue');
 const deleteQueue = require('../lib/cmd/deleteQueue');
 const createWorker = require('../lib/cmd/createWorker');
@@ -16,6 +17,9 @@ const exportCmd = require('../lib/cmd/export');
 
 program.version('0.0.1');
 
+/**
+ * Workspace Commands
+ */
 program.command('selectWorkspace').alias('sws')
         .description('Lists workspaces and allows you to specify which workspace to select for other commands to be run against.')
         .action(function() {
@@ -34,6 +38,15 @@ program.command('createWorkspace [name]').alias('cws')
           createWorkspace(name);
         });
 
+/**
+ * TaskQueue Commands
+ */
+program.command('listQueues').alias('lq')
+        .description('Lists Queues (assumes default profile, and selected workspace)')
+        .action(function() {
+          listQueue();
+        });
+
 program.command('createQueue [name]').alias('cq')
         .description('Creates a Queue (assumes default profile, and selected workspace)')
         .option('-t, --targetWorkerExpression [targetWorkerExpression]', 'Specify a Target Worker Expression')
@@ -47,6 +60,9 @@ program.command('deleteQueue [name]').alias('dq')
           deleteQueue(name);
         });
 
+/**
+ * Worker Commands
+ */
 program.command('createWorker [name]').alias('cw')
         .description('Creates a Worker (assumes default profile, and selected workspace)')
         .action(function(name) {
@@ -58,6 +74,7 @@ program.command('deleteWorker [name]').alias('dw')
         .action(function(name) {
           deleteWorker(name);
         });
+
 
 program.command('export')
         .description('Export an entire Workspace and all sub-resources')
