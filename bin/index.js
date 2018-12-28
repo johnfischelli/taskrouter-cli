@@ -10,6 +10,10 @@ const selectWorkspace = require('../lib/cmd/selectWorkspace');
 const displaySelectedWorkspace = require('../lib/cmd/displaySelectedWorkspace');
 const createWorkspace = require('../lib/cmd/createWorkspace');
 
+const listActivity = require('../lib/cmd/listActivity');
+const createActivity = require('../lib/cmd/createActivity');
+const deleteActivity = require('../lib/cmd/deleteActivity');
+
 const listQueue = require('../lib/cmd/listQueue');
 const createQueue = require('../lib/cmd/createQueue');
 const deleteQueue = require('../lib/cmd/deleteQueue');
@@ -41,6 +45,28 @@ program.command('createWorkspace [name]').alias('cws')
         .description('Creates a Workspace (assumes default profile)')
         .action(function(name) {
           createWorkspace(name);
+        });
+
+/**
+ * Activity Commands
+ */
+program.command('listActivities').alias('la')
+        .description('List Activities (assumes default profile, and selected workspace)')
+        .action(function() {
+          listActivity();
+        });
+
+program.command('createActivity [name]').alias('ca')
+        .description('Creates a Activity (assumes default profile, and selected workspace)')
+        .option('-a, --availability', 'Specifies that workers in this Activity should be considered available for tasks.')
+        .action(function(name, options) {
+          createActivity(name, options);
+        });
+
+program.command('deleteActivity [name]').alias('da')
+        .description('Deletes a Activity by friendly name (assumes default profile, and selected workspace)')
+        .action(function(name) {
+          deleteActivity(name);
         });
 
 /**
