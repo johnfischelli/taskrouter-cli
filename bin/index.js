@@ -36,8 +36,9 @@ program.command('createWorkspace [name]').alias('cws')
 
 program.command('createQueue [name]').alias('cq')
         .description('Creates a Queue (assumes default profile, and selected workspace)')
-        .action(function(name) {
-          createQueue(name);
+        .option('-t, --targetWorkerExpression [targetWorkerExpression]', 'Specify a Target Worker Expression')
+        .action(function(name, options) {
+          createQueue(name, options);
         });
 
 program.command('deleteQueue [name]').alias('dq')
